@@ -173,9 +173,9 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
     }
 
     if (manual) {
-        manual_sr = "Manual: TRUE"
+        manual_sr = "Manual: TRUE";
     } else {
-        manual_sr = "Manual: FALSE"
+        manual_sr = "Manual: FALSE";
     }
 
     if (startPlayback ) {
