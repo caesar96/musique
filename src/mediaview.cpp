@@ -168,9 +168,7 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
         if (manual) media->clearQueue();
         QString path = track->getAbsolutePath();
         qDebug() << "Playing" << path;
-        media->play(path);
-    // Notifications
-        MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());        
+        media->play(path);      
     }
 
     track->setStartTime(QDateTime::currentDateTimeUtc().toTime_t());
@@ -189,6 +187,8 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
     Artist *artist = track->getArtist();
     QString windowTitle = track->getTitle();
     if (artist) {
+        // Notifications
+        MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
         windowTitle += " - " + artist->getName();
     }
     window()->setWindowTitle(windowTitle);
