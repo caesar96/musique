@@ -169,6 +169,8 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
         QString path = track->getAbsolutePath();
         qDebug() << "Playing" << path;
         media->play(path);
+    // Notifications
+        MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());        
     }
 
     track->setStartTime(QDateTime::currentDateTimeUtc().toTime_t());
@@ -206,8 +208,6 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
         LastFm::instance().nowPlaying(track);
     }
 
-    // Notifications
-    MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());
 }
 
 void MediaView::handleError(QString message) {
