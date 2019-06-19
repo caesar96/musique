@@ -172,20 +172,11 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
         media->play(path);      
     }
 
-    if (manual) {
-        manual_sr = "Manual: TRUE";
-    } else {
-        manual_sr = "Manual: FALSE";
-    }
-
-    if (startPlayback ) {
+    if (!startPlayback ) {
         // Notifications
-        MainWindow::instance()->notifications("startPlayback: TRUE", manual_sr, track->getAlbum()->getName(), track->getAlbum()->getImageLocation());  
-    } else {
-        MainWindow::instance()->notifications("startPlayback: FALSE", manual_sr, track->getAlbum()->getName(), track->getAlbum()->getImageLocation()); 
+        MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
     }
-
-
+    
     track->setStartTime(QDateTime::currentDateTimeUtc().toTime_t());
 
     // ensure active item is visible
