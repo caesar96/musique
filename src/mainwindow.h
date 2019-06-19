@@ -25,6 +25,9 @@ $END_LICENSE */
 
 #include "media.h"
 
+#include "dbus/notifications/notifications_adaptor.h"
+#include "dbus/notifications/notifications_interface.h"
+
 class View;
 class MediaView;
 class CollectionScannerView;
@@ -37,7 +40,7 @@ class ToolbarMenu;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
-
+    org::freedesktop::Notifications *notificationsIface;
 public:
     static MainWindow *instance();
 
@@ -53,6 +56,9 @@ public:
     QMenu *getMenu(const char *name);
 
     static void printHelp();
+    //
+    void notifications(const QString &title, const QString &artist, const QString &album, const QString &albumPhoto);
+    //
 
 public slots:
     void showMediaView(bool transition = true);
@@ -140,6 +146,9 @@ private slots:
 
 private:
     MainWindow();
+    //
+    void notificationsInit ();
+    //
     void showView(View *view, bool transition = true);
     void createActions();
     void createMenus();

@@ -29,13 +29,14 @@ $END_LICENSE */
 #include "model/album.h"
 #include "model/artist.h"
 #include "model/track.h"
+
 #ifdef APP_EXTRA
 #include "extra.h"
 #endif
 
 #include "idle.h"
 
-MediaView::MediaView(QWidget *parent) : View(parent) {
+MediaView::MediaView(QWidget *parent) : View(parent) {    
     activeTrack = nullptr;
 
     QBoxLayout *layout = new QHBoxLayout(this);
@@ -204,6 +205,9 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
     if (settings.value("scrobbling").toBool() && LastFm::instance().isAuthorized()) {
         LastFm::instance().nowPlaying(track);
     }
+
+    // Notifications
+    MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());
 }
 
 void MediaView::handleError(QString message) {

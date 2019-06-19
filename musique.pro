@@ -191,8 +191,12 @@ unix:!mac {
     LIBS += -ltag
     INCLUDEPATH += /usr/include/taglib
     QT += dbus
-    HEADERS += src/gnomeglobalshortcutbackend.h
-    SOURCES += src/gnomeglobalshortcutbackend.cpp
+    HEADERS += src/gnomeglobalshortcutbackend.h \
+        src/dbus/notifications/notifications_adaptor.h \
+        src/dbus/notifications/notifications_interface.h
+    SOURCES += src/gnomeglobalshortcutbackend.cpp \
+        src/dbus/notifications/notifications_adaptor.cpp \
+        src/dbus/notifications/notifications_interface.cpp
     isEmpty(PREFIX):PREFIX = /usr/local
     BINDIR = $$PREFIX/bin
     INSTALLS += target

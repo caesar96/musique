@@ -74,14 +74,7 @@ QIcon IconUtils::fromResources(const char *name, const QColor &background) {
 }
 
 QIcon IconUtils::icon(const char *name) {
-#ifdef APP_LINUX
-    QIcon icon = fromTheme(name);
-    if (icon.isNull())
-        icon = fromResources(name, MainWindow::instance()->palette().window().color());
-    return icon;
-#else
     return fromResources(name, MainWindow::instance()->palette().window().color());
-#endif
 }
 
 QIcon IconUtils::icon(const QVector<const char *> &names) {

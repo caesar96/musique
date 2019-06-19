@@ -118,6 +118,8 @@ MainWindow::MainWindow() : toolbarMenu(nullptr), mainToolBar(nullptr) {
 
     showInitialView();
 
+    notificationsInit();
+
     // event filter to block ugly toolbar tooltips
     qApp->installEventFilter(this);
 
@@ -135,6 +137,20 @@ void MainWindow::lazyInit() {
     connect(&shortcuts, SIGNAL(PlayPause()), playAct, SLOT(trigger()));
     connect(&shortcuts, SIGNAL(Stop()), this, SLOT(stop()));
 }
+
+// Dbus
+void MainWindow::notificationsInit() {
+    new NotificationsAdaptor(this);
+    QDBusConnection::sessionBus().registerObject("/", this); 
+    notificationsIface = new org::freedesktop::Notifications("org.freedesktop.Notifications", "/org/freedesktop/Notifications", QDBusConnection::sessionBus(), this);     
+}
+
+void MainWindow::notifications(const QString &title, const QString &artist, const QString &album, const QString &albumPhoto) {
+    uint _id_(12321);
+    QString _summary_ = QString(QLatin1String("%1 | %2:")).arg(title).arg(artist);
+    notificationsIface->Notify(Constants::NAME, _id_, albumPhoto, _summary_, album, QStringList(), QVariantMap(), 100);
+}
+//
 
 void MainWindow::showInitialView() {
     // show the initial view
@@ -225,7 +241,7 @@ void MainWindow::createActions() {
     actionMap.insert("back", backAct);
     connect(backAct, SIGNAL(triggered()), SLOT(goBack()));
 
-    QIcon icon = IconUtils::icon({"audio-headphones", "gtk-info", "help-about"});
+    QIcon icon = IconUtils::icon({"gtk-info", "help-about"});
     contextualAct = new QAction(icon, tr("&Info"), this);
     contextualAct->setStatusTip(tr("Show information about the current track"));
     contextualAct->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_I));

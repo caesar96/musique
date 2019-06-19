@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Genres</source>
-        <translation type="unfinished"/>
+        <translation>Géneros</translation>
     </message>
 </context>
 <context>
@@ -384,11 +384,11 @@
     </message>
     <message>
         <source>&amp;Info</source>
-        <translation>$Info</translation>
+        <translation>&amp;Información</translation>
     </message>
     <message>
         <source>Show information about the current track</source>
-        <translation>Mostar información acerca de la pista actual</translation>
+        <translation>Muestra información acerca de la pista actual</translation>
     </message>
     <message>
         <source>P&amp;revious</source>
@@ -524,7 +524,7 @@
     </message>
     <message>
         <source>Play&amp;list</source>
-        <translation>Reproducir&amp;lista</translation>
+        <translation>&amp;Lista de reproducción</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -624,7 +624,7 @@
     </message>
     <message>
         <source>%1 finished scanning your music collection</source>
-        <translation>%1 escaneo de tu colección de música terminado</translation>
+        <translation>%1 ha terminado de analizar su colección de música</translation>
     </message>
     <message>
         <source>&amp;Love %1? Rate it!</source>
