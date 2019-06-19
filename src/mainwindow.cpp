@@ -147,7 +147,7 @@ void MainWindow::notificationsInit() {
 
 void MainWindow::notifications(const QString &title, const QString &artist, const QString &album, const QString &albumPhoto) {
     uint _id_(12321);
-    QString _summary_ = QString(QLatin1String("%1 | %2:")).arg(title).arg(artist);
+    QString _summary_ = QString(QLatin1String("%1 | %2")).arg(title).arg(artist);
     notificationsIface->Notify(Constants::NAME, _id_, albumPhoto, _summary_, album, QStringList(), QVariantMap(), 100);
 }
 //

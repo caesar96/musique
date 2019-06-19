@@ -150,6 +150,7 @@ void MediaView::stateChanged(Media::State newState) {
 }
 
 void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
+    QString manual_sr;
     errorTimer->stop();
 
     Track *track = playlistModel->trackAt(row);
@@ -171,6 +172,20 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
         media->play(path);      
     }
 
+    if (manual) {
+        manual_sr = "Manual: TRUE"
+    } else {
+        manual_sr = "Manual: FALSE"
+    }
+
+    if (startPlayback ) {
+        // Notifications
+        MainWindow::instance()->notifications("startPlayback: TRUE", manual_sr, track->getAlbum()->getName(), track->getAlbum()->getImageLocation());  
+    } else {
+        MainWindow::instance()->notifications("startPlayback: FALSE", manual_sr, track->getAlbum()->getName(), track->getAlbum()->getImageLocation()); 
+    }
+
+
     track->setStartTime(QDateTime::currentDateTimeUtc().toTime_t());
 
     // ensure active item is visible
@@ -188,7 +203,7 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
     QString windowTitle = track->getTitle();
     if (artist) {
         // Notifications
-        MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
+        //MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
         windowTitle += " - " + artist->getName();
     }
     window()->setWindowTitle(windowTitle);
