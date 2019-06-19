@@ -57,6 +57,7 @@ public:
 
     static void printHelp();
     //
+    void notifications(const QString &message);
     void notifications(const QString &title, const QString &artist, const QString &album, const QString &albumPhoto);
     //
 

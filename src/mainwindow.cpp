@@ -145,6 +145,11 @@ void MainWindow::notificationsInit() {
     notificationsIface = new org::freedesktop::Notifications("org.freedesktop.Notifications", "/org/freedesktop/Notifications", QDBusConnection::sessionBus(), this);     
 }
 
+void MainWindow::notifications(const QString &message) {
+    uint _id_(12321);
+    notificationsIface->Notify(Constants::NAME, _id_, "/usr/share/icons/hicolor/128x128/apps/musique.png", Constants::NAME, message, QStringList(), QVariantMap(), 200);
+}
+
 void MainWindow::notifications(const QString &title, const QString &artist, const QString &album, const QString &albumPhoto) {
     uint _id_(12321);
     QString _summary_ = QString(QLatin1String("%1 | %2")).arg(title).arg(artist);
@@ -912,6 +917,9 @@ void MainWindow::fullScanFinished(const QVariantMap &stats) {
 #ifdef APP_WIN
     QApplication::alert(this, 0);
 #endif
+    //
+    notifications(tr("%1 finished scanning your music collection").arg(Constants::NAME))
+    //
     startImageDownload();
     showFinetuneDialog(stats);
     actionMap["finetune"]->setVisible(true);
