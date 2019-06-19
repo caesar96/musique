@@ -918,7 +918,7 @@ void MainWindow::fullScanFinished(const QVariantMap &stats) {
     QApplication::alert(this, 0);
 #endif
     //
-    notifications(tr("%1 finished scanning your music collection").arg(Constants::NAME))
+    notifications(tr("%1 finished scanning your music collection").arg(Constants::NAME));
     //
     startImageDownload();
     showFinetuneDialog(stats);
