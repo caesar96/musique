@@ -147,13 +147,13 @@ void MainWindow::notificationsInit() {
 
 void MainWindow::notifications(const QString &message) {
     uint _id_(12321);
-    notificationsIface->Notify(Constants::NAME, _id_, "/usr/share/icons/hicolor/128x128/apps/musique.png", Constants::NAME, message, QStringList(), QVariantMap(), 200);
+    notificationsIface->Notify(Constants::NAME, _id_, "/usr/share/icons/hicolor/128x128/apps/musique.png", Constants::NAME, message, QStringList(), QVariantMap(), 98);
 }
 
 void MainWindow::notifications(const QString &title, const QString &artist, const QString &album, const QString &albumPhoto) {
     uint _id_(12321);
     QString _summary_ = QString(QLatin1String("%1 | %2")).arg(title).arg(artist);
-    notificationsIface->Notify(Constants::NAME, _id_, albumPhoto, _summary_, album, QStringList(), QVariantMap(), 200);
+    notificationsIface->Notify(Constants::NAME, _id_, albumPhoto, _summary_, album, QStringList(), QVariantMap(), 205);
 }
 //
 

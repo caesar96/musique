@@ -129,7 +129,6 @@ void MediaView::stateChanged(Media::State newState) {
 
     case Media::PausedState:
         // qDebug("paused");
-        MainWindow::instance()->notifications(tr("Paused"));
         break;
 
     case Media::BufferingState:
@@ -235,6 +234,7 @@ void MediaView::playPause() {
     if (state == Media::PlayingState) {
         qDebug() << "Playing, let's pause";
         media->pause();
+        MainWindow::instance()->notifications(tr("Paused"));        
     } else if (state == Media::PausedState) {
         qDebug() << "Paused, let's play";
         media->play();
@@ -269,6 +269,7 @@ void MediaView::playbackFinished() {
     trackFinished();
     QAction *stopAfterThisAction = MainWindow::instance()->getAction("stopafterthis");
     if (stopAfterThisAction->isChecked()) {
+        MainWindow::instance()->notifications(tr("Stopped"));
         stopAfterThisAction->setChecked(false);
     } else if (!media->hasQueue()) {
         qDebug() << "Empty queue. Manually skipping forward";
