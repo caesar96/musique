@@ -680,7 +680,11 @@
     <message>
         <source>Paused</source>
         <translation>Pausado</translation>
-    </message>      
+    </message>
+    <message>
+        <source>Playing...</source>
+        <translation>Reproduciendo...</translation>
+    </message>  
 </context>
 <context>
     <name>MessageWidget</name>

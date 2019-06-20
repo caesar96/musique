@@ -124,7 +124,6 @@ void MediaView::stateChanged(Media::State newState) {
 
     case Media::StoppedState:
         // reset window title
-        MainWindow::instance()->notifications(tr("Stopped"));
         window()->setWindowTitle(Constants::NAME);
         break;
 
@@ -239,6 +238,7 @@ void MediaView::playPause() {
     } else if (state == Media::PausedState) {
         qDebug() << "Paused, let's play";
         media->play();
+        MainWindow::instance()->notifications(tr("Playing..."));
     } else {
         // we're currently not playing, let's rock
         qDebug() << "Not playing";
@@ -259,7 +259,7 @@ void MediaView::trackRemoved() {
 
 void MediaView::playlistFinished() {
     MainWindow::instance()->showMessage(tr("Playlist finished"));
-
+    MainWindow::instance()->notifications(tr("Stopped"));
     QAction *a = MainWindow::instance()->getAction("contextual");
     if (a->isChecked()) MainWindow::instance()->hideContextualView();
     a->setEnabled(false);

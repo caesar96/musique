@@ -680,6 +680,10 @@
     <message>
         <source>Paused</source>
         <translation>Pausado</translation>
+    </message>
+    <message>
+        <source>Playing...</source>
+        <translation>Reproduciendo...</translation>
     </message>      
 </context>
 <context>
