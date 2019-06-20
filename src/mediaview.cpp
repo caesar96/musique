@@ -124,11 +124,13 @@ void MediaView::stateChanged(Media::State newState) {
 
     case Media::StoppedState:
         // reset window title
+        MainWindow::instance()->notifications(tr("Stopped"));
         window()->setWindowTitle(Constants::NAME);
         break;
 
     case Media::PausedState:
         // qDebug("paused");
+        MainWindow::instance()->notifications(tr("Paused"));
         break;
 
     case Media::BufferingState:
@@ -171,11 +173,6 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
         qDebug() << "Playing" << path;
         media->play(path);      
     }
-
-    if (!startPlayback ) {
-        // Notifications
-        MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
-    }
     
     track->setStartTime(QDateTime::currentDateTimeUtc().toTime_t());
 
@@ -194,7 +191,9 @@ void MediaView::activeRowChanged(int row, bool manual, bool startPlayback) {
     QString windowTitle = track->getTitle();
     if (artist) {
         // Notifications
-        //MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
+        if (!startPlayback ) {
+            MainWindow::instance()->notifications(track->getTitle(), track->getArtist()->getName(), track->getAlbum()->getName(), track->getAlbum()->getImageLocation());          
+        }       
         windowTitle += " - " + artist->getName();
     }
     window()->setWindowTitle(windowTitle);

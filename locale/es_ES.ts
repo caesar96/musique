@@ -673,6 +673,14 @@
         <source>Playlist finished</source>
         <translation>Lista de reproducción terminada</translation>
     </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Detenido</translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation>Pausado</translation>
+    </message>      
 </context>
 <context>
     <name>MessageWidget</name>
